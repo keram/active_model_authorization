@@ -19,7 +19,7 @@ And then execute:
 Include into Model you want to provide authorizations for lines:
 
 ```ruby
-extend ActiveModelAuthorization::Concern
+include ActiveModelAuthorization::Concern
 
 def self.authorization_requester_role(requester)
   # Here comes application or model specific role logic
