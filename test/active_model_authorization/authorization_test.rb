@@ -67,7 +67,7 @@ module ActiveModelAuthorization
           'Chocolate Cake'
         end
 
-      assert_equal false, failure
+      assert_equal nil, failure
     end
 
     def test_undefined_method_raise_exception

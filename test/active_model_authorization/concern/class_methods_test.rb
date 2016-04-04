@@ -125,7 +125,7 @@ module ActiveModelAuthorization
           'Chocolate Cake'
         end
 
-        assert_equal false, failure
+        assert_equal nil, failure
       end
     end
   end

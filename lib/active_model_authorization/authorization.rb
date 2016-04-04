@@ -17,7 +17,7 @@ module ActiveModelAuthorization
     def authorize_with_block(action_name, &block)
       {
         true => block,
-        false => -> { false }
+        false => -> {}
       }[authorize(action_name)].call
     end
 
