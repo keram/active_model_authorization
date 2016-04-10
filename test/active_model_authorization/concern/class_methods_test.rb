@@ -1,30 +1,6 @@
 # frozen_string_literal: true
 require 'test_helper'
 
-class ExtendedObject
-  extend ActiveModelAuthorization::Concern::ClassMethods
-
-  def self.authorization_requester_role(*)
-    'Test'
-  end
-end
-
-class ExtendedWithoutRequesterRoleObject
-  extend ActiveModelAuthorization::Concern::ClassMethods
-end
-
-module Some
-  module Nested
-    class ExtendedObject
-      extend ActiveModelAuthorization::Concern::ClassMethods
-
-      def self.authorization_requester_role(*)
-        'Test'
-      end
-    end
-  end
-end
-
 module ActiveModelAuthorization
   module Concern
     class ClassMethodsTest < Minitest::Test

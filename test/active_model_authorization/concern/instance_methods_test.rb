@@ -2,30 +2,6 @@
 require 'test_helper'
 require 'active_model_authorization/concern/class_methods_test'
 
-class IncludedObject
-  include ActiveModelAuthorization::Concern::InstanceMethods
-
-  def authorization_requester_role(*)
-    'Test'
-  end
-end
-
-class IncludedWithoutRequesterRoleObject
-  include ActiveModelAuthorization::Concern::InstanceMethods
-end
-
-module Some
-  module Nested
-    class IncludedObject
-      include ActiveModelAuthorization::Concern::InstanceMethods
-
-      def authorization_requester_role(*)
-        'Test'
-      end
-    end
-  end
-end
-
 module ActiveModelAuthorization
   module Concern
     class InstanceMethodsTest < ClassMethodsTest

@@ -1,18 +1,6 @@
 # frozen_string_literal: true
 require 'test_helper'
 
-class IncludedObject
-  include ActiveModelAuthorization::Concern
-
-  def authorization_requester_role(*)
-    'Test'
-  end
-end
-
-class IncludedWithoutRequesterRoleObject
-  include ActiveModelAuthorization::Concern
-end
-
 module ActiveModelAuthorization
   class ConcernTest < Minitest::Test
     def test_included_object_respond_to_authorize

@@ -15,6 +15,8 @@ require 'minitest/autorun'
 require 'minitest/reporters'
 require 'byebug'
 
+require 'model_fixtures'
+
 module Minitest
   Reporters.use! [Reporters::DefaultReporter.new(color: true)]
 end
