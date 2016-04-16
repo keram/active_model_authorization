@@ -7,13 +7,13 @@ module ActiveModelAuthorization
 
       private
 
-      def authorization_sender_class_name
-        self.class.name
+      def authorization_sender_class
+        self.class
       end
 
       def authorization_access_denied_message(requester)
         AccessDeniedMessage.new(requester.class.name,
-                                authorization_sender_class_name)
+                                authorization_sender_class.name)
       end
     end
   end

@@ -4,52 +4,46 @@ require 'test_helper'
 module ActiveModelAuthorization
   class ConcernTest < Minitest::Test
     def test_included_object_respond_to_authorize
-      instance = IncludedObject.new
+      instance = ConcernedObject.new
       assert instance.respond_to?(:authorize!)
     end
 
-    #  def authorize!(requester, action_name)
-    def test_authorize_bang_without_role_implementation_raises_exception
-      requester = nil
-      action_name = 'something'
-      instance = IncludedWithoutRequesterRoleObject.new
+    def test_authorize_bang_with_role_implementation_raise_access_denied
+      instance = ConcernedObject.new
 
-      assert_raises(NotImplemented) do
-        instance.authorize!(requester, action_name)
+      requester = nil
+      assert_raises(AccessDenied) do
+        instance.authorize!(requester, prohibited_action)
       end
     end
 
-    def test_not_implemented_exception_message
-      instance = IncludedWithoutRequesterRoleObject.new
-      instance.authorize!(nil, 'something')
-    rescue NotImplemented => error
-      assert_equal(
-        'The method `authorization_requester_role` must be implemented in ' +
-        IncludedWithoutRequesterRoleObject.name,
-        error.message)
-    end
-
-    def test_authorize_bang_with_role_implementation_raise_access_denied
-      instance = IncludedObject.new
+    def test_authorize_bang_with_role_on_subclass
+      instance = ConcernedSubObject.new
 
       requester = nil
-      action_name = 'something'
 
       assert_raises(AccessDenied) do
-        instance.authorize!(requester, action_name)
+        instance.authorize!(requester, prohibited_action)
       end
     end
 
-    def test_that_it_can_make_tea
-      object = IncludedObject.new
+    # def test_that_it_can_make_tea
+    #   object = ConcernedObject.new
 
-      requester = nil
+    #   requester = nil
 
-      assert object.authorize!(requester, authorized_action)
-    end
+    #   assert object.authorize!(requester, authorized_action)
+    # end
+
+    # def test_inherited_concern
+    # end
 
     def authorized_action
       'make_a_tea'
+    end
+
+    def prohibited_action
+      'have_a_cake'
     end
   end
 end

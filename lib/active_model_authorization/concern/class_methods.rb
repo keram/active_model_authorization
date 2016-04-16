@@ -23,18 +23,18 @@ module ActiveModelAuthorization
       def authorization_instance_for(requester)
         AuthorizationInstanceFactory
           .new(self,
-               authorization_sender_class_name,
+               authorization_sender_class,
                authorization_access_denied_message(requester))
           .build(requester)
       end
 
-      def authorization_sender_class_name
-        name
+      def authorization_sender_class
+        self
       end
 
       def authorization_access_denied_message(requester)
         AccessDeniedMessage.new(requester.class.name,
-                                authorization_sender_class_name.pluralize)
+                                authorization_sender_class.name.pluralize)
       end
     end
   end
