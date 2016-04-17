@@ -5,6 +5,7 @@ require 'active_model_authorization/authorization'
 require 'active_model_authorization/authorization_instance_factory'
 require 'active_model_authorization/concern'
 require 'active_model_authorization/access_denied_message'
+require 'active_model_authorization/authorization_file_preloader'
 
 module ActiveModelAuthorization
 end

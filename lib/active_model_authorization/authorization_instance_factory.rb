@@ -7,12 +7,14 @@ module ActiveModelAuthorization
       'The method `authorization_requester_role` must be implemented in '
 
     attr_reader :sender, :sender_class,
-                :access_denied_message
+                :access_denied_message,
+                :namespaces
 
     def initialize(sender, sender_class, access_denied_message)
       @sender = sender
       @sender_class = sender_class
       @access_denied_message = access_denied_message
+      @namespaces = ancestors(sender_class)
     end
 
     def build(requester)
@@ -26,8 +28,7 @@ module ActiveModelAuthorization
     end
 
     def authorization_requester_role(requester)
-      sender.send(:authorization_requester_role, requester)
-
+      sender.authorization_requester_role(requester)
     rescue NoMethodError
       raise NotImplemented,
             NOT_IMPLEMENTED_AUTHORIZATION_REQUESTER_ROLE_MESSAGE_PREFIX +
@@ -35,7 +36,7 @@ module ActiveModelAuthorization
     end
 
     def authorization_class(authorization_class_name)
-      ancestors(sender_class).each do |ancestor|
+      namespaces.each do |ancestor|
         begin
           return Authorizations.module_eval(ancestor.name +
                                             '::' +

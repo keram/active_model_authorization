@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 require 'test_helper'
-require 'authorizations/concerned_object/test_authorization'
 
 module ActiveModelAuthorization
   class AuthorizationInstanceFactoryTest < Minitest::Test
